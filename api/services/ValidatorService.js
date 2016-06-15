@@ -3,6 +3,7 @@
 
 export default {
   inRangeN(num, end = Cube.MAX_N){
+    console.log('inRangeN num',num,'end',end,'return',_.inRange(num, Cube.MIN_N, end + 1));
     return _.inRange(num, Cube.MIN_N, end + 1)
   },
   inRangeM(num, end = Cube.MAX_M){

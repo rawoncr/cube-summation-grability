@@ -40,6 +40,29 @@ export default {
       this.data[x - 1][y - 1][z - 1] = W
       this.save()
       return this
+    },
+    sum(x1,y1,z1,x2,y2,z2) {
+      if (this.remainingOperations <= 0)
+        throw Error('No se aceptan mas operaciones para este cubo')
+      console.log(x1,y1,z1,x2,y2,z2)
+      if (!ValidatorService.inRangeN(x2, this.N) || !ValidatorService.inRangeN(x1, this.N) || x1 > x2)
+        throw Error(Cube.MIN_N + ' <= x1 <= x2 <= ' + this.N)
+      if (!ValidatorService.inRangeN(y2, this.N) || !ValidatorService.inRangeN(y1, this.N) || y1 > y2)
+        throw Error(Cube.MIN_N + ' <= y1 <= y2 <= ' + this.N)
+      if (!ValidatorService.inRangeN(z2, this.N) || !ValidatorService.inRangeN(z1, this.N) || z1 > z2)
+        throw Error(Cube.MIN_N + ' <= z1 <= z2 <= ' + this.N)
+
+      let sum = 0
+      for (let i = x1 - 1; i <= x2 - 1; i++) {
+        for (let j = y1 - 1; j <= y2 - 1; j++) {
+          for (let k = z1 - 1; k <= z2 - 1; k++) {
+            sum += parseInt(this.data[i][j][k])
+          }
+        }
+      }
+      this.remainingOperations--
+      this.save()
+      return { sum: sum }
     }
 
   },
