@@ -27,7 +27,7 @@ module.exports = {
   },
   models: {
     connection: 'mongo',
-    migrate: 'drop'
+    migrate: 'safe'
   },
   sockets: {
     adapter: 'memory'

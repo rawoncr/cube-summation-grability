@@ -5,5 +5,7 @@ module.exports = {
   '/*': function(req, res, next) {
     console.log('Requested', (req.isSocket) ? 'Socket' : '', ':: ', req.method, req.url)
     next();
-  }
+  },
+  'PUT /cube/:id': {action: 'update'}
+  
 }
