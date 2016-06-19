@@ -44,7 +44,6 @@ export default {
     sum(x1,y1,z1,x2,y2,z2) {
       if (this.remainingOperations <= 0)
         throw Error('No se aceptan mas operaciones para este cubo')
-      console.log(x1,y1,z1,x2,y2,z2)
       if (!ValidatorService.inRangeN(x2, this.N) || !ValidatorService.inRangeN(x1, this.N) || x1 > x2)
         throw Error(Cube.MIN_N + ' <= x1 <= x2 <= ' + this.N)
       if (!ValidatorService.inRangeN(y2, this.N) || !ValidatorService.inRangeN(y1, this.N) || y1 > y2)

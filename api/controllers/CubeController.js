@@ -4,21 +4,48 @@
  * @description :: Server-side logic for managing cubes
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
-
 export default {
-  /**
-   * @author Ramon Caraballo
-   * @description update a block cube
-   * @return 200 cube
-   */
-  update(req, res) {
+    create(req, res) {
+      Cube.create(req.body)
+        .then(cube => res.ok(cube))
+        .catch(err => {
+          sails.log.warn('CubeController:create', err)
+          return res.badRequest(_.pick(err, 'message'))
+        })
+    },
+    find(req, res) {
+      Cube.find()
+        .then(cubes => res.ok(cubes))
+        .catch(err => {
+          sails.log.warn('CubeController:find', err)
+          return res.badRequest(_.pick(err, 'message'))
+        })
+    },
+    findOne(req, res) {
+      Cube.findOne(req.params.id)
+        .then(cube => {
+          if (!cube)
+            throw Error('Cubo no exite')
+          return res.ok(cube)
+        })
+        .catch(err => {
+          sails.log.warn('CubeController:findOne', err)
+          return res.badRequest(_.pick(err, 'message'))
+        })
+    },
+    /**
+     * @author Ramon Caraballo
+     * @description update a block cube
+     * @return 200 cube
+     */
+    update(req, res) {
       const [x, y, z, W] = [req.body.x, req.body.y, req.body.z, req.body.W]
       Cube.findOne(req.params.id)
         .then(cube => cube.updateBlock(x, y, z, W))
         .then(cube => res.ok(cube))
         .catch(err => {
           sails.log.warn('CubeController:update', err)
-          return res.badRequest()
+          return res.badRequest(_.pick(err, 'message'))
         })
 
     },
@@ -30,7 +57,7 @@ export default {
         .then(sum => res.ok(sum))
         .catch(err => {
           sails.log.warn('CubeController:query', err)
-          return res.badRequest()
+          return res.badRequest(_.pick(err, 'message'))
         })
 
     }
