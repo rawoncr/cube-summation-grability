@@ -47,6 +47,7 @@ describe('CubeController', () => {
       .query(query)
       .expect(200)
       .then(res => {
+        // Se espera que la sumatoria sea 5
         sails.log.debug('GET /cube/' + cube.id + '/query', JSON.stringify(res.body) + '\n\n')
         done()
       })
@@ -85,7 +86,8 @@ describe('CubeController', () => {
       .query(query)
       .expect(200)
       .then(res => {
-        sails.log.debug('GET /cube/' + cube.id + '/query', JSON.stringify(JSON.stringify(res.body) + '\n\n'))
+        // Se espera que la sumatoria sea 14
+        sails.log.debug('GET /cube/' + cube.id + '/query',JSON.stringify(res.body) + '\n\n')
         done()
       })
       .catch(err => done(err))
@@ -105,6 +107,7 @@ describe('CubeController', () => {
       .query(query)
       .expect(200)
       .then(res => {
+        // Se espera que la sumatoria sea 19
         sails.log.debug('GET /cube/' + cube.id + '/query', JSON.stringify(res.body) + '\n\n')
         done()
       })
@@ -121,7 +124,7 @@ describe('CubeController', () => {
     request(app)
       .put('/cube/' + cube.id)
       .send(update)
-      .expect(400)
+      .expect(400) // Se espera que retorne 400 pues M es igual a 5 y esta seria la operacion numero 6
       .then(res => {
         sails.log.debug('PUT /cube/' + cube.id, JSON.stringify(res.body) + '\n\n')
         done()

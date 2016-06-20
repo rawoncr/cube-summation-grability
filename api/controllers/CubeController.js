@@ -5,11 +5,16 @@
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 export default {
+  /**
+   * @author Ramon Caraballo
+   * @description create one cube
+   * @return 200 cube
+   */
     create(req, res) {
       Cube.create(req.body)
         .then(cube => res.ok(cube))
         .catch(err => {
-          sails.log.warn('CubeController:create', err)
+          sails.log.warn('CubeController:create', err.message)
           return res.badRequest(_.pick(err, 'message'))
         })
     },
@@ -17,7 +22,7 @@ export default {
       Cube.find()
         .then(cubes => res.ok(cubes))
         .catch(err => {
-          sails.log.warn('CubeController:find', err)
+          sails.log.warn('CubeController:find', err.message)
           return res.badRequest(_.pick(err, 'message'))
         })
     },
@@ -29,13 +34,13 @@ export default {
           return res.ok(cube)
         })
         .catch(err => {
-          sails.log.warn('CubeController:findOne', err)
+          sails.log.warn('CubeController:findOne', err.message)
           return res.badRequest(_.pick(err, 'message'))
         })
     },
     /**
      * @author Ramon Caraballo
-     * @description update a block cube
+     * @description update a block cube - operator update
      * @return 200 cube
      */
     update(req, res) {
@@ -44,11 +49,16 @@ export default {
         .then(cube => cube.updateBlock(x, y, z, W))
         .then(cube => res.ok(cube))
         .catch(err => {
-          sails.log.warn('CubeController:update', err)
+          sails.log.warn('CubeController:update', err.message)
           return res.badRequest(_.pick(err, 'message'))
         })
 
     },
+    /**
+     * @author Ramon Caraballo
+     * @description operator query
+     * @return 200 sum
+     */
     query(req, res) {
       const [x1, y1, z1] = [req.query.x1, req.query.y1, req.query.z1]
       const [x2, y2, z2] = [req.query.x2, req.query.y2, req.query.z2]
@@ -56,7 +66,7 @@ export default {
         .then(cube => cube.sum(x1, y1, z1, x2, y2, z2))
         .then(sum => res.ok(sum))
         .catch(err => {
-          sails.log.warn('CubeController:query', err)
+          sails.log.warn('CubeController:query', err.message)
           return res.badRequest(_.pick(err, 'message'))
         })
 

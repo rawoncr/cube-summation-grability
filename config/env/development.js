@@ -14,14 +14,14 @@ module.exports = {
   connections: {
     mongo: {
       adapter: 'sails-mongo',
-      host: process.env.MONGO_PORT_27017_TCP_ADDR,
-      port: process.env.MONGO_PORT_27017_TCP_PORT,
+      host: process.env.MONGO_PORT_27017_TCP_ADDR || '127.0.0.1',
+      port: process.env.MONGO_PORT_27017_TCP_PORT || '27017',
       database: "sails-dev"
     },
     test: {
       adapter: 'sails-mongo',
-      host: process.env.MONGO_PORT_27017_TCP_ADDR,
-      port: process.env.MONGO_PORT_27017_TCP_PORT,
+      host: process.env.MONGO_PORT_27017_TCP_ADDR || '127.0.0.1',
+      port: process.env.MONGO_PORT_27017_TCP_PORT || '27017',
       database: "sails-test"
     }
   },
